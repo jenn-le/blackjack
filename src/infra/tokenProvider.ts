@@ -106,7 +106,7 @@ export class InsecureTokenProvider implements ITokenProvider {
   ): Promise<ITokenResponse> {
     return {
       fromCache: true,
-      jwt: generateToken(tenantId, this.tenantKey, [], documentId, this.user),
+      jwt: generateToken(tenantId, this.tenantKey, [2], documentId, this.user),
     };
   }
 
@@ -119,7 +119,7 @@ export class InsecureTokenProvider implements ITokenProvider {
   ): Promise<ITokenResponse> {
     return {
       fromCache: true,
-      jwt: generateToken(tenantId, this.tenantKey, [], documentId, this.user),
+      jwt: generateToken(tenantId, this.tenantKey, [2], documentId, this.user),
     };
   }
 }
@@ -158,7 +158,7 @@ export const azureUser = {
 export function generateToken(
   tenantId: string,
   key: string,
-  scopes: unknown[],
+  scopes: number[],
   documentId?: string,
   user?: IInsecureUser,
   lifetime: number = 60 * 60,

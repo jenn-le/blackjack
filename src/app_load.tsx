@@ -27,10 +27,10 @@ export async function loadApp(
   if (sessionTree.compatibility.canInitialize) {
     sessionTree.initialize({ clients: [] });
   }
-  const appTree =
+  const view =
     container.initialObjects.appData.viewWith(appTreeConfiguration);
-  if (appTree.compatibility.canInitialize) {
-    appTree.initialize(new Game([]));
+  if (view.compatibility.canInitialize) {
+    view.initialize("test");
   }
 
   // create the root element for React
@@ -47,7 +47,7 @@ export async function loadApp(
   // interactive immediately.
   root.render(
     <DndProvider backend={HTML5Backend}>
-      <h1>blackjack</h1>
+      <h1>{view.root}</h1>
     </DndProvider>,
   );
 

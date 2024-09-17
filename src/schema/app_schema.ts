@@ -13,5 +13,5 @@ export class Game extends sf.object("Game", {}) {}
 // This is passed into the SharedTree when it is initialized.
 export const appTreeConfiguration = new TreeViewConfiguration(
   // Schema for the root
-  { schema: Game },
+  { schema: sf.string },
 );
