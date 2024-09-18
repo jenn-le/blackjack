@@ -3,18 +3,19 @@ import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { createRoot } from "react-dom/client";
-import { appTreeConfiguration, Game } from "./schema/app_schema.js";
+import { appTreeConfiguration, Deck, Player, Table } from "./schema/app_schema.js";
 import { sessionTreeConfiguration } from "./schema/session_schema.js";
 import { containerSchema } from "./schema/container_schema.js";
 import { loadFluidData } from "./infra/fluid.js";
 import { IFluidContainer } from "fluid-framework";
+import { TableComponent } from "./components/table.js";
 
-export async function loadApp(
+export async function loadGame(
   client: AzureClient,
   containerId: string,
 ): Promise<IFluidContainer> {
   // Initialize Fluid Container
-  const { container } = await loadFluidData(
+  const { services, container } = await loadFluidData(
     containerId,
     containerSchema,
     client,
@@ -30,7 +31,15 @@ export async function loadApp(
   const view =
     container.initialObjects.appData.viewWith(appTreeConfiguration);
   if (view.compatibility.canInitialize) {
-    view.initialize("test");
+    view.initialize(new Table({
+      players: [
+        new Player({
+          username: "tester",
+          money: 100,
+        })
+      ],
+      deck: new Deck({ cards: [], numberOfDecks: 2, count: 0 })
+    }));
   }
 
   // create the root element for React
@@ -47,7 +56,17 @@ export async function loadApp(
   // interactive immediately.
   root.render(
     <DndProvider backend={HTML5Backend}>
-      <h1>{view.root}</h1>
+       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"></link>
+      </head>
+      <TableComponent 
+        table={view} 
+        username="tester" 
+        sessionTree={sessionTree} 
+        audience={services.audience} 
+        container={container} />
     </DndProvider>,
   );
 

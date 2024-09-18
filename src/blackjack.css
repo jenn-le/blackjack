@@ -1,0 +1,15 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #609372;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.table {
+    width: 100vw;
+    height: 100vh;
+    margin: 5rem;
+}

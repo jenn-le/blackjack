@@ -1,5 +1,5 @@
 import { AzureClient } from "@fluidframework/azure-client";
-import { loadApp } from "./app_load.js";
+import { loadGame } from "./app_load.js";
 import { clientProps } from "./infra/clientProps.js";
 import { AttachState } from "fluid-framework";
 
@@ -12,7 +12,7 @@ export async function anonymousAzureStart() {
   const client = new AzureClient(clientProps);
 
   // Load the app
-  const container = await loadApp(client, containerId);
+  const container = await loadGame(client, containerId);
 
   // If the app is in a `createNew` state - no containerId, and the container is detached, we attach the container.
   // This uploads the container to the service and connects to the collaboration session.
