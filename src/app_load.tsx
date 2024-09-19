@@ -3,7 +3,7 @@ import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { createRoot } from "react-dom/client";
-import { appTreeConfiguration, Deck, Player, Table } from "./schema/app_schema.js";
+import { appTreeConfiguration, Deck, Hand, Player, Table } from "./schema/app_schema.js";
 import { sessionTreeConfiguration } from "./schema/session_schema.js";
 import { containerSchema } from "./schema/container_schema.js";
 import { loadFluidData } from "./infra/fluid.js";
@@ -38,7 +38,9 @@ export async function loadGame(
           money: 100,
         })
       ],
-      deck: new Deck({ cards: [], numberOfDecks: 2, count: 0 })
+      deck: new Deck({ cards: [], numberOfDecks: 2, count: 0 }),
+      // TODO: make it so the dealer doesn't need to store a bet
+      dealer: new Hand({ bet: 0, cards: [] })
     }));
   }
 
@@ -48,8 +50,7 @@ export async function loadGame(
   document.body.appendChild(app);
   const root = createRoot(app);
 
-  // Create undo/redo stacks for the app
-  // const undoRedo = createUndoRedoStacks(appTree.events);
+  // TODO: add a page or some way for users to specify their usernames or actually log in
 
   // Render the app - note we attach new containers after render so
   // the app renders instantly on create new flow. The app will be
@@ -62,7 +63,7 @@ export async function loadGame(
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"></link>
       </head>
       <TableComponent 
-        table={view} 
+        view={view} 
         username="tester" 
         sessionTree={sessionTree} 
         audience={services.audience} 

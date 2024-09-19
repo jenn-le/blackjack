@@ -1,39 +1,20 @@
 import React from "react";
-import { Hand, Player } from "../schema/app_schema.js";
+import { Player } from "../schema/app_schema.js";
+import { HandComponent } from "./hand.js";
 
 export function PlayerComponent(props: {
 	player: Player;
-	// container: IFluidContainer;
+    class: string
 }): JSX.Element {
-	// const [currentUser, setCurrentUser] = useState("undefined");
-	// const [connectionState, setConnectionState] = useState("");
-	// const [saved, setSaved] = useState(false);
-	// const [fluidMembers, setFluidMembers] = useState<string[]>([]);
-
 	return (
 		<div
-			id="player"
+			className={props.class}
 		>
 			<div id="player-pic" />
             <h1>{props.player.username}</h1>
-		</div>
-	);
-}
-
-export function HandComponent(props: {
-    hand: Hand;
-	// container: IFluidContainer;
-}): JSX.Element {
-	// const [currentUser, setCurrentUser] = useState("undefined");
-	// const [connectionState, setConnectionState] = useState("");
-	// const [saved, setSaved] = useState(false);
-	// const [fluidMembers, setFluidMembers] = useState<string[]>([]);
-
-	return (
-		<div
-			id="hand"
-		>
-			
+            {
+                props.player.hand !== undefined ? <HandComponent hand={props.player.hand} /> : undefined
+            }
 		</div>
 	);
 }

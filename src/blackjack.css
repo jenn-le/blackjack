@@ -11,5 +11,15 @@ html, body {
 .table {
     width: 100vw;
     height: 100vh;
+    display: flex;
+}
+
+.other-players {
+    width: 60%;
+    margin: 5rem;
+}
+
+.main-player {
+    width: 40%;
     margin: 5rem;
 }
