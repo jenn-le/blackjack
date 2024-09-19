@@ -4,6 +4,7 @@ import { Tree } from "fluid-framework";
 
 export function HandComponent(props: {
     hand: Hand;
+    dealer: boolean;
 	// container: IFluidContainer;
 }): JSX.Element {
     const [cards, setCards] = useState<Card[]>(
@@ -22,7 +23,11 @@ export function HandComponent(props: {
 			id="hand"
 		>
 			{
-                cards.map((card, index) => <CardComponent key={index} card={card} />)
+                cards.map((card, index) => {
+                    return props.dealer && index == 1 ?
+                        <div className="hidden-card" key={index} /> :
+                        <CardComponent key={index} card={card} />
+                })
             }
 		</div>
 	);

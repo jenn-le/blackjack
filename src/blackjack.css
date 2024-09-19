@@ -17,9 +17,52 @@ html, body {
 .other-players {
     width: 60%;
     margin: 5rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .main-player {
     width: 40%;
     margin: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.player {
+    flex-direction: column;
+}
+
+.player-info {
+    flex-direction: row;
+}
+
+.player-pic {
+    height: 10rem;
+    width: 10rem;
+    background-color: #D9D9D9;
+    border-radius: 100%;
+}
+
+.card {
+    height: 100px;
+    width: 60px;
+    border-radius: 2rem;
+    background-color: #D9D9D9;
+}
+
+.hidden-card {
+    height: 100px;
+    width: 60px;
+    border-radius: 0.25rem;
+    background-color: #150A0A;
+}
+
+.button {
+    color: #FFFFFF;
+    background-color: #C897D9;
+    stroke: none;
+    border-radius: 20px;
+    border: none;
+    width: 60%;
+    height: 5vh;
 }

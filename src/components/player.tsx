@@ -10,10 +10,12 @@ export function PlayerComponent(props: {
 		<div
 			className={props.class}
 		>
-			<div id="player-pic" />
-            <h1>{props.player.username}</h1>
+            <div className="player-info">
+                <div className="player-pic" />
+                <h1>{props.player.username}</h1>
+            </div>
             {
-                props.player.hand !== undefined ? <HandComponent hand={props.player.hand} /> : undefined
+                props.player.hand !== undefined ? <HandComponent dealer={false} hand={props.player.hand} /> : undefined
             }
 		</div>
 	);

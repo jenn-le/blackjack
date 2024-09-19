@@ -10,9 +10,11 @@ export function DealerComponent(props: {
 		<div
 			id="player"
 		>
-			<div id="player-pic" />
-            <h1>dealer</h1>
-            <HandComponent hand={props.hand} />
+			<div className="player-info">
+                <div className="player-pic" />
+                <h1>dealer</h1>
+            </div>
+            <HandComponent dealer={true} hand={props.hand} />
 		</div>
 	);
 }

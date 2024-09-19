@@ -14,13 +14,7 @@ export function TableComponent(props: {
 	audience: IServiceAudience<IMember>;
 	container: IFluidContainer;
 }): JSX.Element {
-	// const [currentUser, setCurrentUser] = useState("undefined");
-	// const [connectionState, setConnectionState] = useState("");
-	// const [saved, setSaved] = useState(false);
-	// const [fluidMembers, setFluidMembers] = useState<string[]>([]);
-
-    // copy all the state
-	// to force a re-render when the array changes
+    // copy the player array state to force a re-render when the array changes
 	const [players, setPlayers] = useState<Player[]>(
 		props.view.root.players.map((player) => player),
 	);
@@ -87,15 +81,6 @@ export function TableComponent(props: {
 		<div
             className="table"
 		>
-			{
-                // TODO make some kind of header maybe?
-                /* <Header
-				saved={saved}
-				connectionState={connectionState}
-				fluidMembers={fluidMembers}
-				clientId={currentUser}
-			    /> */
-            }
             <div className="other-players">
                 <DealerComponent hand={props.view.root.dealer} />
                 {
@@ -107,8 +92,12 @@ export function TableComponent(props: {
             {
                 !betMade ?
                     <div className="make-bet main-player">
+                        <div className="player-info">
+                            <div className="player-pic" />
+                            <h1>{mainPlayer.username}</h1>
+                        </div>
                         <button
-                            color="white"
+                            className="button"
                             onClick={(e: React.MouseEvent) => handleMakeBetClick(e)}
                         >
                             make bet
@@ -118,23 +107,6 @@ export function TableComponent(props: {
                         <PlayerComponent class="main" player={mainPlayer} />
                     </div>
             }
-		</div>
-	);
-}
-
-export function Header(props: {
-	saved: boolean;
-	connectionState: string;
-	fluidMembers: string[];
-	clientId: string;
-}): JSX.Element {
-	return (
-		<div className="h-[48px] flex shrink-0 flex-row items-center justify-between bg-black text-base text-white z-40 w-full">
-			<div className="flex m-2">Blackjack</div>
-			<div className="flex m-2 ">
-				{props.saved ? "saved" : "not saved"} | {props.connectionState} | users:{" "}
-				{props.fluidMembers.length}
-			</div>
 		</div>
 	);
 }
